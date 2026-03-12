@@ -1,0 +1,705 @@
+import { useMemo, useState } from "react";
+import { ShoppingBag, Menu, X, ArrowRight, Plus, Minus, ChevronRight, Sparkles } from "lucide-react";
+
+export default function ArchhausLandingPage() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [page, setPage] = useState("home");
+  const [cart, setCart] = useState([]);
+
+  const products = [
+    {
+      id: 1,
+      name: "The Core Tee",
+      tone: "Off White",
+      price: 58,
+      desc: "A clean oversized essential with a soft structure and understated finish.",
+      category: "Tops",
+      badge: "Best Seller",
+      palette: ["#f1ece4", "#d8d0c4"],
+      type: "tee",
+    },
+    {
+      id: 2,
+      name: "The Form Hoodie",
+      tone: "Taupe",
+      price: 128,
+      desc: "Relaxed, weighty, and minimal—built for everyday presence.",
+      category: "Outerwear",
+      badge: "Signature",
+      palette: ["#b7aa97", "#8d7f6d"],
+      type: "hoodie",
+    },
+    {
+      id: 3,
+      name: "The Standard Crew",
+      tone: "Charcoal",
+      price: 112,
+      desc: "Quietly refined layering with a sharp, wearable silhouette.",
+      category: "Tops",
+      badge: "New",
+      palette: ["#575553", "#3a3938"],
+      type: "crew",
+    },
+    {
+      id: 4,
+      name: "The AH Cap",
+      tone: "Black",
+      price: 42,
+      desc: "A minimal finishing piece featuring the signature monogram.",
+      category: "Accessories",
+      badge: "Essential",
+      palette: ["#181818", "#434343"],
+      type: "cap",
+    },
+    {
+      id: 5,
+      name: "The Studio Pant",
+      tone: "Stone",
+      price: 118,
+      desc: "Relaxed structure with a clean line and a premium everyday drape.",
+      category: "Bottoms",
+      badge: "Refined Fit",
+      palette: ["#dfd6ca", "#c5baab"],
+      type: "pants",
+    },
+    {
+      id: 6,
+      name: "The Layer Zip",
+      tone: "Olive",
+      price: 134,
+      desc: "An understated zip layer designed for movement through daily life.",
+      category: "Outerwear",
+      badge: "Drop 001",
+      palette: ["#7b7c65", "#585a46"],
+      type: "zip",
+    },
+  ];
+
+  const journal = [
+    {
+      title: "Built in Restraint",
+      text: "Archhaus is designed around the idea that strong style does not need noise. Clean form, modern silhouettes, and a calm visual language create presence through simplicity.",
+    },
+    {
+      title: "Made for Daily Life",
+      text: "This is clothing for movement—campus, cafés, evenings out, travel, and the spaces in between. Elevated enough to feel intentional, relaxed enough to live in.",
+    },
+    {
+      title: "Young, Open, Refined",
+      text: "Archhaus speaks to a generation that values taste without performance. The brand is welcoming, expressive, and grounded in everyday confidence.",
+    },
+  ];
+
+  const categories = ["All", "Tops", "Outerwear", "Bottoms", "Accessories"];
+
+  const filteredProducts = useMemo(() => {
+    if (selectedCategory === "All") return products;
+    return products.filter((product) => product.category === selectedCategory);
+  }, [selectedCategory]);
+
+  const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+
+  function addToCart(product) {
+    setCart((prev) => {
+      const existing = prev.find((item) => item.id === product.id);
+      if (existing) {
+        return prev.map((item) =>
+          item.id === product.id ? { ...item, qty: item.qty + 1 } : item
+        );
+      }
+      return [...prev, { ...product, qty: 1 }];
+    });
+    setCartOpen(true);
+  }
+
+  function updateQty(id, delta) {
+    setCart((prev) =>
+      prev
+        .map((item) =>
+          item.id === id ? { ...item, qty: Math.max(0, item.qty + delta) } : item
+        )
+        .filter((item) => item.qty > 0)
+    );
+  }
+
+  function LogoMark({ dark = false, small = false }) {
+    return (
+      <div
+        className={`relative flex items-center justify-center rounded-[28%] border ${
+          dark
+            ? "border-white/15 bg-white/10 text-white"
+            : "border-black/10 bg-white text-black"
+        } ${small ? "h-11 w-11" : "h-14 w-14 shadow-sm"}`}
+      >
+        <div className="relative h-[62%] w-[62%]">
+          <div
+            className={`absolute left-[14%] top-[14%] h-[72%] w-[28%] border-l-2 border-t-2 rounded-tl-[1.2rem] ${
+              dark ? "border-white" : "border-black"
+            }`}
+          />
+          <div
+            className={`absolute right-[14%] top-[14%] h-[72%] w-[28%] border-r-2 border-t-2 rounded-tr-[1.2rem] ${
+              dark ? "border-white" : "border-black"
+            }`}
+          />
+          <div
+            className={`absolute left-1/2 top-[45%] h-[2px] w-[36%] -translate-x-1/2 ${
+              dark ? "bg-white" : "bg-black"
+            }`}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  function ProductVisual({ product }) {
+    return (
+      <div
+        className="relative flex h-80 items-center justify-center overflow-hidden rounded-[1.75rem] border border-black/8"
+        style={{
+          background: `linear-gradient(135deg, ${product.palette[0]}, ${product.palette[1]})`,
+        }}
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.45),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(0,0,0,0.10),transparent_32%)]" />
+        <div className="absolute left-4 top-4 rounded-full bg-white/70 px-3 py-1 text-[0.62rem] uppercase tracking-[0.24em] text-black/60 backdrop-blur-sm">
+          {product.badge}
+        </div>
+
+        {product.type === "tee" && (
+          <div className="relative h-48 w-44 rounded-b-[1.4rem] rounded-t-[0.8rem] bg-[#f7f2ea] shadow-[0_18px_35px_rgba(0,0,0,0.12)]">
+            <div className="absolute -left-7 top-3 h-20 w-10 rounded-l-full bg-[#f7f2ea]" />
+            <div className="absolute -right-7 top-3 h-20 w-10 rounded-r-full bg-[#f7f2ea]" />
+            <div className="absolute left-1/2 top-6 -translate-x-1/2"><LogoMark small /></div>
+          </div>
+        )}
+
+        {product.type === "hoodie" && (
+          <div className="relative h-52 w-44 rounded-b-[1.5rem] rounded-t-[1rem] bg-[#bda892] shadow-[0_18px_35px_rgba(0,0,0,0.16)]">
+            <div className="absolute left-1/2 top-[-18px] h-14 w-24 -translate-x-1/2 rounded-t-[999px] border border-black/10 bg-[#c8b39c]" />
+            <div className="absolute -left-7 top-5 h-20 w-10 rounded-l-full bg-[#bda892]" />
+            <div className="absolute -right-7 top-5 h-20 w-10 rounded-r-full bg-[#bda892]" />
+            <div className="absolute left-1/2 top-16 -translate-x-1/2"><LogoMark small /></div>
+          </div>
+        )}
+
+        {product.type === "crew" && (
+          <div className="relative h-48 w-44 rounded-b-[1.5rem] rounded-t-[1rem] bg-[#51504f] shadow-[0_18px_35px_rgba(0,0,0,0.22)]">
+            <div className="absolute left-1/2 top-0 h-5 w-16 -translate-x-1/2 rounded-b-full bg-[#666462]" />
+            <div className="absolute -left-7 top-5 h-20 w-10 rounded-l-full bg-[#51504f]" />
+            <div className="absolute -right-7 top-5 h-20 w-10 rounded-r-full bg-[#51504f]" />
+            <div className="absolute left-1/2 top-14 -translate-x-1/2"><LogoMark dark small /></div>
+          </div>
+        )}
+
+        {product.type === "cap" && (
+          <div className="relative h-28 w-44 rounded-t-full bg-[#121212] shadow-[0_18px_35px_rgba(0,0,0,0.25)]">
+            <div className="absolute right-[-8px] top-12 h-7 w-24 rounded-r-full bg-[#1f1f1f]" />
+            <div className="absolute left-1/2 top-10 -translate-x-1/2"><LogoMark dark small /></div>
+          </div>
+        )}
+
+        {product.type === "pants" && (
+          <div className="relative h-56 w-36">
+            <div className="absolute left-0 top-0 h-full w-[47%] rounded-b-[1.4rem] rounded-t-[0.7rem] bg-[#ece2d6] shadow-[0_18px_35px_rgba(0,0,0,0.14)]" />
+            <div className="absolute right-0 top-0 h-full w-[47%] rounded-b-[1.4rem] rounded-t-[0.7rem] bg-[#e2d6c8] shadow-[0_18px_35px_rgba(0,0,0,0.14)]" />
+            <div className="absolute left-1/2 top-6 -translate-x-1/2"><LogoMark small /></div>
+          </div>
+        )}
+
+        {product.type === "zip" && (
+          <div className="relative h-52 w-44 rounded-b-[1.5rem] rounded-t-[1rem] bg-[#73755f] shadow-[0_18px_35px_rgba(0,0,0,0.18)]">
+            <div className="absolute left-1/2 top-0 h-full w-[2px] -translate-x-1/2 bg-white/40" />
+            <div className="absolute left-1/2 top-[-14px] h-10 w-20 -translate-x-1/2 rounded-t-[999px] border border-black/10 bg-[#7f8069]" />
+            <div className="absolute -left-7 top-5 h-20 w-10 rounded-l-full bg-[#73755f]" />
+            <div className="absolute -right-7 top-5 h-20 w-10 rounded-r-full bg-[#73755f]" />
+            <div className="absolute left-1/2 top-16 -translate-x-1/2"><LogoMark dark small /></div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  function CartDrawer() {
+    return (
+      <div
+        className={`fixed inset-y-0 right-0 z-[70] w-full max-w-md transform border-l border-black/10 bg-[#f7f2ea] shadow-[0_20px_80px_rgba(0,0,0,0.18)] transition duration-300 ${
+          cartOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="flex h-full flex-col">
+          <div className="flex items-center justify-between border-b border-black/10 px-6 py-5">
+            <div>
+              <div className="text-[0.7rem] uppercase tracking-[0.28em] text-black/45">Cart</div>
+              <div className="mt-1 text-2xl font-light">Your selection</div>
+            </div>
+            <button onClick={() => setCartOpen(false)} className="rounded-full border border-black/10 p-2 hover:bg-white">
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+
+          <div className="flex-1 space-y-4 overflow-auto px-6 py-5">
+            {cart.length === 0 ? (
+              <div className="rounded-[1.5rem] border border-black/10 bg-white p-6 text-sm leading-7 text-black/60">
+                Your cart is empty. Add a piece from the collection to begin building the first Archhaus drop.
+              </div>
+            ) : (
+              cart.map((item) => (
+                <div key={item.id} className="rounded-[1.5rem] border border-black/10 bg-white p-4 shadow-sm">
+                  <div className="flex items-start gap-4">
+                    <div className="flex h-20 w-20 items-center justify-center rounded-[1.2rem] border border-black/8 bg-[#ece5da]">
+                      <LogoMark small />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <div className="font-medium">{item.name}</div>
+                          <div className="mt-1 text-xs uppercase tracking-[0.2em] text-black/40">{item.tone}</div>
+                        </div>
+                        <div className="text-sm text-black/70">${item.price}</div>
+                      </div>
+                      <div className="mt-4 flex items-center gap-2">
+                        <button onClick={() => updateQty(item.id, -1)} className="rounded-full border border-black/10 p-2 hover:bg-[#f5f1ea]"><Minus className="h-3.5 w-3.5" /></button>
+                        <div className="min-w-8 text-center text-sm">{item.qty}</div>
+                        <button onClick={() => updateQty(item.id, 1)} className="rounded-full border border-black/10 p-2 hover:bg-[#f5f1ea]"><Plus className="h-3.5 w-3.5" /></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+
+          <div className="border-t border-black/10 px-6 py-5">
+            <div className="flex items-center justify-between text-sm text-black/60">
+              <span>Subtotal</span>
+              <span className="text-lg font-medium text-black">${subtotal}</span>
+            </div>
+            <button className="mt-4 w-full rounded-full bg-black px-5 py-3 text-sm uppercase tracking-[0.22em] text-white hover:opacity-90">
+              Checkout
+            </button>
+            <p className="mt-3 text-xs leading-5 text-black/45">Concept checkout flow for storefront preview.</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  function HomePage() {
+    return (
+      <>
+        <section className="relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.95),transparent_25%),radial-gradient(circle_at_bottom_left,rgba(0,0,0,0.04),transparent_30%)]" />
+          <div className="mx-auto grid max-w-7xl gap-14 px-6 py-16 md:grid-cols-2 md:px-10 md:py-24">
+            <div className="relative z-10 flex flex-col justify-center">
+              <div className="mb-5 inline-flex w-fit items-center gap-3 rounded-full border border-black/10 bg-white/80 px-4 py-2 text-[0.72rem] uppercase tracking-[0.3em] text-black/60 shadow-sm">
+                <span className="inline-block h-2 w-2 rounded-full bg-black" />
+                Quiet Luxury Streetwear
+              </div>
+              <h1 className="max-w-xl text-5xl font-light leading-[1.02] tracking-[-0.04em] md:text-7xl">
+                Refined essentials for a more effortless daily uniform.
+              </h1>
+              <p className="mt-6 max-w-lg text-base leading-7 text-black/65 md:text-lg">
+                Archhaus brings architectural clarity to modern streetwear—clean silhouettes,
+                restrained detailing, and a premium visual language that feels elevated,
+                inviting, and easy to wear.
+              </p>
+
+              <div className="mt-10 flex flex-wrap items-center gap-4">
+                <button
+                  onClick={() => setPage("collection")}
+                  className="rounded-full bg-black px-7 py-3 text-sm uppercase tracking-[0.22em] text-white transition hover:opacity-90"
+                >
+                  Shop the First Drop
+                </button>
+                <a
+                  href="#philosophy"
+                  className="rounded-full border border-black/15 px-7 py-3 text-sm uppercase tracking-[0.22em] transition hover:bg-white"
+                >
+                  Discover Archhaus
+                </a>
+              </div>
+
+              <div className="mt-12 grid max-w-xl grid-cols-3 gap-4 border-t border-black/10 pt-6">
+                <div>
+                  <div className="text-2xl font-light">01</div>
+                  <div className="mt-1 text-sm text-black/55">Launch collection built around modern essentials.</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-light">AH</div>
+                  <div className="mt-1 text-sm text-black/55">Signature monogram designed for subtle identity.</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-light">24/7</div>
+                  <div className="mt-1 text-sm text-black/55">Made for campus, city, evenings, and everyday wear.</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="relative z-10">
+              <div className="grid h-full gap-5 md:grid-cols-[1.1fr_0.9fr]">
+                <div className="min-h-[500px] rounded-[2rem] border border-black/10 bg-[#d8d1c5] p-6 shadow-[0_20px_60px_rgba(0,0,0,0.08)]">
+                  <div className="flex h-full flex-col justify-between rounded-[1.5rem] border border-white/35 bg-[linear-gradient(180deg,rgba(255,255,255,0.45),rgba(255,255,255,0.08))] p-6">
+                    <div className="flex items-center justify-between">
+                      <span className="rounded-full bg-black/80 px-3 py-1 text-[0.65rem] uppercase tracking-[0.25em] text-white">
+                        Drop 001
+                      </span>
+                      <span className="text-xs uppercase tracking-[0.28em] text-black/55">Archhaus</span>
+                    </div>
+
+                    <div className="flex flex-1 items-center justify-center py-10">
+                      <div className="flex h-52 w-52 items-center justify-center rounded-[2rem] border border-black/10 bg-[#f8f4ee] shadow-inner">
+                        <LogoMark />
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="text-sm uppercase tracking-[0.25em] text-black/50">Signature Mark</div>
+                      <div className="mt-2 text-2xl font-light">The AH monogram</div>
+                      <p className="mt-3 max-w-sm text-sm leading-6 text-black/65">
+                        A custom geometric mark that brings more structure and polish to the identity system,
+                        built to feel premium on tags, caps, packaging, and garments.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid gap-5">
+                  <div className="rounded-[2rem] border border-black/10 bg-white p-6 shadow-[0_16px_45px_rgba(0,0,0,0.06)]">
+                    <div className="text-[0.7rem] uppercase tracking-[0.28em] text-black/45">Palette</div>
+                    <div className="mt-4 flex gap-3">
+                      {[
+                        "#111111",
+                        "#f5f1ea",
+                        "#8f826f",
+                        "#6d6a66",
+                        "#7d8064",
+                      ].map((color) => (
+                        <div
+                          key={color}
+                          className="h-12 w-12 rounded-full border border-black/10"
+                          style={{ backgroundColor: color }}
+                        />
+                      ))}
+                    </div>
+                    <p className="mt-4 text-sm leading-6 text-black/60">
+                      Black, stone, taupe, charcoal, and muted olive shape the first visual language.
+                    </p>
+                  </div>
+
+                  <div className="rounded-[2rem] border border-black/10 bg-[#111111] p-6 text-white shadow-[0_16px_45px_rgba(0,0,0,0.16)]">
+                    <div className="text-[0.7rem] uppercase tracking-[0.28em] text-white/45">Brand Note</div>
+                    <p className="mt-4 text-lg font-light leading-8 text-white/90">
+                      Style that feels expensive, accessible, and lived in—without losing its edge.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="collection" className="mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-24">
+          <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <div className="text-[0.72rem] uppercase tracking-[0.3em] text-black/45">Collection</div>
+              <h2 className="mt-3 text-3xl font-light tracking-[-0.03em] md:text-5xl">
+                The first Archhaus drop.
+              </h2>
+            </div>
+            <p className="max-w-xl text-sm leading-6 text-black/60 md:text-base">
+              Built as a refined capsule of everyday essentials—minimal, wearable, and designed to invite repeat use.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {products.slice(0, 4).map((product) => (
+              <div
+                key={product.id}
+                className="group rounded-[2rem] border border-black/10 bg-white p-5 shadow-[0_14px_35px_rgba(0,0,0,0.05)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_45px_rgba(0,0,0,0.08)]"
+              >
+                <ProductVisual product={product} />
+                <div className="mt-5 flex items-start justify-between gap-4">
+                  <div>
+                    <h3 className="text-lg font-medium">{product.name}</h3>
+                    <div className="mt-1 text-sm uppercase tracking-[0.18em] text-black/45">{product.tone}</div>
+                  </div>
+                  <div className="text-sm text-black/70">${product.price}</div>
+                </div>
+                <p className="mt-3 text-sm leading-6 text-black/60">{product.desc}</p>
+                <div className="mt-5 flex gap-3">
+                  <button
+                    onClick={() => addToCart(product)}
+                    className="rounded-full bg-black px-4 py-2 text-sm text-white transition hover:opacity-90"
+                  >
+                    Add to Cart
+                  </button>
+                  <button
+                    onClick={() => setPage("collection")}
+                    className="rounded-full border border-black/15 px-4 py-2 text-sm transition hover:bg-[#f5f1ea]"
+                  >
+                    View Piece
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8 flex justify-center">
+            <button
+              onClick={() => setPage("collection")}
+              className="inline-flex items-center gap-2 rounded-full border border-black/15 px-6 py-3 text-sm uppercase tracking-[0.22em] transition hover:bg-white"
+            >
+              View Full Collection <ArrowRight className="h-4 w-4" />
+            </button>
+          </div>
+        </section>
+
+        <section id="philosophy" className="border-y border-black/10 bg-white/60">
+          <div className="mx-auto grid max-w-7xl gap-10 px-6 py-16 md:grid-cols-[0.95fr_1.05fr] md:px-10 md:py-24">
+            <div>
+              <div className="text-[0.72rem] uppercase tracking-[0.3em] text-black/45">Philosophy</div>
+              <h2 className="mt-3 text-3xl font-light tracking-[-0.03em] md:text-5xl">
+                Luxury in restraint. Streetwear in form.
+              </h2>
+            </div>
+            <div className="space-y-6 text-base leading-8 text-black/65">
+              <p>
+                Archhaus is built for young adults who want their style to feel composed rather than overworked.
+                It draws from architecture, clean interiors, calm city spaces, and the idea that casual clothing can still
+                carry real presence.
+              </p>
+              <p>
+                The brand is intentionally open and inviting. While the design language is refined, the world of Archhaus is
+                not exclusive in attitude—it is meant to be explored, worn, and made personal.
+              </p>
+              <p>
+                Every piece is guided by clarity, comfort, and visual discipline, creating a uniform that feels modern,
+                mature, and easy to step into.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="journal" className="mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-24">
+          <div className="mb-10">
+            <div className="text-[0.72rem] uppercase tracking-[0.3em] text-black/45">Journal</div>
+            <h2 className="mt-3 text-3xl font-light tracking-[-0.03em] md:text-5xl">
+              A softer kind of statement.
+            </h2>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {journal.map((item) => (
+              <article
+                key={item.title}
+                className="rounded-[2rem] border border-black/10 bg-[#f8f5ef] p-6 shadow-[0_12px_30px_rgba(0,0,0,0.04)]"
+              >
+                <div className="text-[0.7rem] uppercase tracking-[0.26em] text-black/40">Archhaus Note</div>
+                <h3 className="mt-4 text-2xl font-light tracking-[-0.02em]">{item.title}</h3>
+                <p className="mt-4 text-sm leading-7 text-black/60">{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="newsletter" className="mx-auto max-w-5xl px-6 pb-16 md:px-10 md:pb-24">
+          <div className="rounded-[2.25rem] border border-black/10 bg-[#111111] px-6 py-12 text-white shadow-[0_25px_70px_rgba(0,0,0,0.18)] md:px-12">
+            <div className="mx-auto max-w-3xl text-center">
+              <div className="text-[0.72rem] uppercase tracking-[0.32em] text-white/45">Join Archhaus</div>
+              <h2 className="mt-4 text-3xl font-light tracking-[-0.03em] md:text-5xl">
+                Be first into the next drop.
+              </h2>
+              <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-white/70 md:text-base">
+                Get launch updates, early access, and a closer look at the evolving world of Archhaus.
+              </p>
+
+              <div className="mx-auto mt-8 flex max-w-xl flex-col gap-3 sm:flex-row">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="h-12 flex-1 rounded-full border border-white/15 bg-white/10 px-5 text-sm text-white placeholder:text-white/40 outline-none transition focus:border-white/35"
+                />
+                <button className="h-12 rounded-full bg-white px-6 text-sm uppercase tracking-[0.22em] text-black transition hover:opacity-90">
+                  Join
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </>
+    );
+  }
+
+  function CollectionPage() {
+    return (
+      <section className="mx-auto max-w-7xl px-6 py-12 md:px-10 md:py-16">
+        <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+          <div>
+            <div className="text-[0.72rem] uppercase tracking-[0.3em] text-black/45">Collection Page</div>
+            <h1 className="mt-3 text-4xl font-light tracking-[-0.04em] md:text-6xl">Drop 001 — Full Collection</h1>
+            <p className="mt-4 max-w-2xl text-base leading-7 text-black/60">
+              A fuller storefront-style view with category filters, richer product presentation, and a more complete shopping experience.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`rounded-full px-4 py-2 text-sm transition ${
+                  selectedCategory === category
+                    ? "bg-black text-white"
+                    : "border border-black/15 bg-white text-black hover:bg-[#f5f1ea]"
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {filteredProducts.map((product) => (
+            <div
+              key={product.id}
+              className="rounded-[2rem] border border-black/10 bg-white p-5 shadow-[0_14px_35px_rgba(0,0,0,0.05)]"
+            >
+              <ProductVisual product={product} />
+              <div className="mt-5 flex items-start justify-between gap-4">
+                <div>
+                  <h3 className="text-xl font-medium">{product.name}</h3>
+                  <div className="mt-1 text-sm uppercase tracking-[0.2em] text-black/40">{product.tone} · {product.category}</div>
+                </div>
+                <div className="text-base text-black/75">${product.price}</div>
+              </div>
+              <p className="mt-3 text-sm leading-6 text-black/60">{product.desc}</p>
+              <div className="mt-6 flex items-center justify-between">
+                <button
+                  onClick={() => addToCart(product)}
+                  className="rounded-full bg-black px-5 py-2.5 text-sm uppercase tracking-[0.18em] text-white hover:opacity-90"
+                >
+                  Add to Cart
+                </button>
+                <button className="inline-flex items-center gap-2 text-sm text-black/60 hover:text-black">
+                  Product Details <ChevronRight className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-[#f5f1ea] text-[#161616] selection:bg-black selection:text-white">
+      <header className="sticky top-0 z-50 border-b border-black/10 bg-[#f5f1ea]/90 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-10">
+          <button onClick={() => setPage("home")} className="flex items-center gap-4 text-left">
+            <LogoMark />
+            <div>
+              <div className="text-[0.92rem] uppercase tracking-[0.42em]">Archhaus</div>
+              <div className="text-[0.72rem] uppercase tracking-[0.28em] text-black/50">
+                Understated by Design
+              </div>
+            </div>
+          </button>
+
+          <nav className="hidden items-center gap-8 text-sm text-black/70 md:flex">
+            <button onClick={() => setPage("collection")} className="transition hover:text-black">Collection</button>
+            <a href="#philosophy" className="transition hover:text-black">Philosophy</a>
+            <a href="#journal" className="transition hover:text-black">Journal</a>
+            <a href="#newsletter" className="transition hover:text-black">Join</a>
+          </nav>
+
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setCartOpen(true)}
+              className="relative hidden rounded-full border border-black/15 px-4 py-2 text-sm transition hover:bg-black hover:text-white md:flex md:items-center md:gap-2"
+            >
+              <ShoppingBag className="h-4 w-4" /> Cart
+              {cart.length > 0 && (
+                <span className="absolute -right-2 -top-2 flex h-5 min-w-5 items-center justify-center rounded-full bg-black px-1 text-[10px] text-white">
+                  {cart.reduce((sum, item) => sum + item.qty, 0)}
+                </span>
+              )}
+            </button>
+            <button
+              onClick={() => setMobileOpen((v) => !v)}
+              className="rounded-full border border-black/15 p-2.5 md:hidden"
+            >
+              {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
+        </div>
+
+        {mobileOpen && (
+          <div className="border-t border-black/10 bg-[#f5f1ea] px-6 py-4 md:hidden">
+            <div className="flex flex-col gap-3 text-sm text-black/70">
+              <button onClick={() => { setPage("home"); setMobileOpen(false); }} className="rounded-xl border border-black/10 bg-white px-4 py-3 text-left">Home</button>
+              <button onClick={() => { setPage("collection"); setMobileOpen(false); }} className="rounded-xl border border-black/10 bg-white px-4 py-3 text-left">Collection</button>
+              <button onClick={() => { setCartOpen(true); setMobileOpen(false); }} className="rounded-xl border border-black/10 bg-white px-4 py-3 text-left">Cart</button>
+              <a href="#newsletter" onClick={() => setMobileOpen(false)} className="rounded-xl border border-black/10 bg-white px-4 py-3 text-left">Join</a>
+            </div>
+          </div>
+        )}
+      </header>
+
+      <main>
+        {page === "home" ? <HomePage /> : <CollectionPage />}
+
+        <section className="mx-auto max-w-7xl px-6 pb-16 md:px-10 md:pb-24">
+          <div className="grid gap-6 md:grid-cols-3">
+            <div className="rounded-[2rem] border border-black/10 bg-white p-6 shadow-sm">
+              <div className="flex items-center gap-3 text-[0.72rem] uppercase tracking-[0.28em] text-black/45">
+                <Sparkles className="h-4 w-4" /> Storefront Detail
+              </div>
+              <h3 className="mt-4 text-2xl font-light">Shopify-style layout</h3>
+              <p className="mt-3 text-sm leading-7 text-black/60">
+                The site now reads more like a proper online store, with shopping actions, category browsing, and stronger product presentation.
+              </p>
+            </div>
+            <div className="rounded-[2rem] border border-black/10 bg-white p-6 shadow-sm">
+              <div className="text-[0.72rem] uppercase tracking-[0.28em] text-black/45">Logo Upgrade</div>
+              <h3 className="mt-4 text-2xl font-light">Custom AH monogram</h3>
+              <p className="mt-3 text-sm leading-7 text-black/60">
+                A more bespoke mark replaces the basic initials, giving Archhaus a cleaner and more recognizable identity across the site.
+              </p>
+            </div>
+            <div className="rounded-[2rem] border border-black/10 bg-white p-6 shadow-sm">
+              <div className="text-[0.72rem] uppercase tracking-[0.28em] text-black/45">Mobile Ready</div>
+              <h3 className="mt-4 text-2xl font-light">Responsive menu + cart</h3>
+              <p className="mt-3 text-sm leading-7 text-black/60">
+                Young shoppers can explore smoothly on mobile through the slide-down menu and cart drawer without losing the refined brand feel.
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer className="border-t border-black/10 bg-[#f5f1ea]">
+        <div className="mx-auto flex max-w-7xl flex-col gap-6 px-6 py-8 text-sm text-black/55 md:flex-row md:items-center md:justify-between md:px-10">
+          <div className="flex items-center gap-4">
+            <LogoMark small />
+            <div>
+              <div className="uppercase tracking-[0.34em] text-black">Archhaus</div>
+              <div className="text-xs uppercase tracking-[0.22em] text-black/45">Quiet Presence</div>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-5 uppercase tracking-[0.2em] text-[0.7rem]">
+            <button onClick={() => setPage("home")} className="hover:text-black">Home</button>
+            <button onClick={() => setPage("collection")} className="hover:text-black">Collection</button>
+            <a href="#journal" className="hover:text-black">Journal</a>
+            <a href="#newsletter" className="hover:text-black">Join</a>
+          </div>
+        </div>
+      </footer>
+
+      {cartOpen && <div onClick={() => setCartOpen(false)} className="fixed inset-0 z-[60] bg-black/20 backdrop-blur-[1px]" />}
+      <CartDrawer />
+    </div>
+  );
+}
