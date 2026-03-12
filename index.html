@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { ShoppingBag, Menu, X, ArrowRight, Plus, Minus, ChevronRight, Sparkles } from "lucide-react";
 
-export default function ArchhausLandingPage() {
+export default function MagnusLandingPage() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -12,83 +12,83 @@ export default function ArchhausLandingPage() {
     {
       id: 1,
       name: "The Core Tee",
-      tone: "Off White",
-      price: 58,
-      desc: "A clean oversized essential with a soft structure and understated finish.",
+      tone: "Cream",
+      price: 62,
+      desc: "A refined oversized essential with a soft structure and a quietly elevated finish.",
       category: "Tops",
       badge: "Best Seller",
-      palette: ["#f1ece4", "#d8d0c4"],
+      palette: ["#f3ece2", "#ddd0c0"],
       type: "tee",
     },
     {
       id: 2,
-      name: "The Form Hoodie",
-      tone: "Taupe",
-      price: 128,
-      desc: "Relaxed, weighty, and minimal—built for everyday presence.",
+      name: "The House Hoodie",
+      tone: "Camel",
+      price: 132,
+      desc: "Relaxed, weighty, and warm in tone—built for confident daily wear.",
       category: "Outerwear",
       badge: "Signature",
-      palette: ["#b7aa97", "#8d7f6d"],
+      palette: ["#c3a07f", "#987559"],
       type: "hoodie",
     },
     {
       id: 3,
       name: "The Standard Crew",
-      tone: "Charcoal",
-      price: 112,
-      desc: "Quietly refined layering with a sharp, wearable silhouette.",
+      tone: "Espresso",
+      price: 116,
+      desc: "Quietly refined layering with a sharper, more grounded silhouette.",
       category: "Tops",
       badge: "New",
-      palette: ["#575553", "#3a3938"],
+      palette: ["#5b463c", "#362822"],
       type: "crew",
     },
     {
       id: 4,
-      name: "The AH Cap",
+      name: "The Magnus Cap",
       tone: "Black",
-      price: 42,
-      desc: "A minimal finishing piece featuring the signature monogram.",
+      price: 46,
+      desc: "A minimal finishing piece featuring the signature Magnus monogram.",
       category: "Accessories",
       badge: "Essential",
-      palette: ["#181818", "#434343"],
+      palette: ["#171311", "#3a2d28"],
       type: "cap",
     },
     {
       id: 5,
       name: "The Studio Pant",
-      tone: "Stone",
-      price: 118,
+      tone: "Warm Stone",
+      price: 122,
       desc: "Relaxed structure with a clean line and a premium everyday drape.",
       category: "Bottoms",
       badge: "Refined Fit",
-      palette: ["#dfd6ca", "#c5baab"],
+      palette: ["#e3d5c5", "#c9b49e"],
       type: "pants",
     },
     {
       id: 6,
-      name: "The Layer Zip",
-      tone: "Olive",
-      price: 134,
-      desc: "An understated zip layer designed for movement through daily life.",
+      name: "The Evening Zip",
+      tone: "Olive Brown",
+      price: 138,
+      desc: "An understated zip layer designed for movement through city evenings and daily life.",
       category: "Outerwear",
       badge: "Drop 001",
-      palette: ["#7b7c65", "#585a46"],
+      palette: ["#8a725d", "#5d4a3f"],
       type: "zip",
     },
   ];
 
   const journal = [
     {
-      title: "Built in Restraint",
-      text: "Archhaus is designed around the idea that strong style does not need noise. Clean form, modern silhouettes, and a calm visual language create presence through simplicity.",
+      title: "Quiet Confidence",
+      text: "Magnus is designed around the idea that personal style should feel assured, composed, and quietly elevated. Refined silhouettes, warm neutrals, and a calm visual language create presence through restraint.",
     },
     {
-      title: "Made for Daily Life",
-      text: "This is clothing for movement—campus, cafés, evenings out, travel, and the spaces in between. Elevated enough to feel intentional, relaxed enough to live in.",
+      title: "Made to Be Lived In",
+      text: "This is clothing for movement—campus, cafés, evenings out, travel, and the spaces in between. Elevated enough to feel intentional, relaxed enough to become part of a daily rhythm.",
     },
     {
-      title: "Young, Open, Refined",
-      text: "Archhaus speaks to a generation that values taste without performance. The brand is welcoming, expressive, and grounded in everyday confidence.",
+      title: "Open, Personal, Refined",
+      text: "Magnus speaks to a generation that values polish without pretension. The brand is aspirational but welcoming, grounded in confidence rather than distance.",
     },
   ];
 
@@ -127,26 +127,31 @@ export default function ArchhausLandingPage() {
   function LogoMark({ dark = false, small = false }) {
     return (
       <div
-        className={`relative flex items-center justify-center rounded-[28%] border ${
+        className={`relative flex items-center justify-center rounded-[30%] border ${
           dark
             ? "border-white/15 bg-white/10 text-white"
-            : "border-black/10 bg-white text-black"
+            : "border-[#3f2d23]/10 bg-white text-[#231913]"
         } ${small ? "h-11 w-11" : "h-14 w-14 shadow-sm"}`}
       >
-        <div className="relative h-[62%] w-[62%]">
+        <div className="relative h-[70%] w-[68%]">
           <div
-            className={`absolute left-[14%] top-[14%] h-[72%] w-[28%] border-l-2 border-t-2 rounded-tl-[1.2rem] ${
-              dark ? "border-white" : "border-black"
+            className={`absolute left-[10%] top-[14%] h-[72%] w-[18%] border-l-2 ${
+              dark ? "border-white" : "border-[#231913]"
             }`}
           />
           <div
-            className={`absolute right-[14%] top-[14%] h-[72%] w-[28%] border-r-2 border-t-2 rounded-tr-[1.2rem] ${
-              dark ? "border-white" : "border-black"
+            className={`absolute left-[24%] top-[14%] h-[48%] w-[18%] border-l-2 border-r-2 border-t-2 rounded-t-[0.85rem] ${
+              dark ? "border-white" : "border-[#231913]"
             }`}
           />
           <div
-            className={`absolute left-1/2 top-[45%] h-[2px] w-[36%] -translate-x-1/2 ${
-              dark ? "bg-white" : "bg-black"
+            className={`absolute right-[10%] top-[14%] h-[72%] w-[18%] border-r-2 ${
+              dark ? "border-white" : "border-[#231913]"
+            }`}
+          />
+          <div
+            className={`absolute left-1/2 top-[48%] h-[2px] w-[30%] -translate-x-1/2 ${
+              dark ? "bg-white" : "bg-[#231913]"
             }`}
           />
         </div>
@@ -162,58 +167,58 @@ export default function ArchhausLandingPage() {
           background: `linear-gradient(135deg, ${product.palette[0]}, ${product.palette[1]})`,
         }}
       >
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.45),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(0,0,0,0.10),transparent_32%)]" />
-        <div className="absolute left-4 top-4 rounded-full bg-white/70 px-3 py-1 text-[0.62rem] uppercase tracking-[0.24em] text-black/60 backdrop-blur-sm">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.42),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(0,0,0,0.12),transparent_32%)]" />
+        <div className="absolute left-4 top-4 rounded-full bg-white/72 px-3 py-1 text-[0.62rem] uppercase tracking-[0.24em] text-black/60 backdrop-blur-sm">
           {product.badge}
         </div>
 
         {product.type === "tee" && (
-          <div className="relative h-48 w-44 rounded-b-[1.4rem] rounded-t-[0.8rem] bg-[#f7f2ea] shadow-[0_18px_35px_rgba(0,0,0,0.12)]">
-            <div className="absolute -left-7 top-3 h-20 w-10 rounded-l-full bg-[#f7f2ea]" />
-            <div className="absolute -right-7 top-3 h-20 w-10 rounded-r-full bg-[#f7f2ea]" />
+          <div className="relative h-48 w-44 rounded-b-[1.4rem] rounded-t-[0.8rem] bg-[#f8f1e8] shadow-[0_18px_35px_rgba(0,0,0,0.12)]">
+            <div className="absolute -left-7 top-3 h-20 w-10 rounded-l-full bg-[#f8f1e8]" />
+            <div className="absolute -right-7 top-3 h-20 w-10 rounded-r-full bg-[#f8f1e8]" />
             <div className="absolute left-1/2 top-6 -translate-x-1/2"><LogoMark small /></div>
           </div>
         )}
 
         {product.type === "hoodie" && (
-          <div className="relative h-52 w-44 rounded-b-[1.5rem] rounded-t-[1rem] bg-[#bda892] shadow-[0_18px_35px_rgba(0,0,0,0.16)]">
-            <div className="absolute left-1/2 top-[-18px] h-14 w-24 -translate-x-1/2 rounded-t-[999px] border border-black/10 bg-[#c8b39c]" />
-            <div className="absolute -left-7 top-5 h-20 w-10 rounded-l-full bg-[#bda892]" />
-            <div className="absolute -right-7 top-5 h-20 w-10 rounded-r-full bg-[#bda892]" />
+          <div className="relative h-52 w-44 rounded-b-[1.5rem] rounded-t-[1rem] bg-[#ba936f] shadow-[0_18px_35px_rgba(0,0,0,0.16)]">
+            <div className="absolute left-1/2 top-[-18px] h-14 w-24 -translate-x-1/2 rounded-t-[999px] border border-black/10 bg-[#c8a481]" />
+            <div className="absolute -left-7 top-5 h-20 w-10 rounded-l-full bg-[#ba936f]" />
+            <div className="absolute -right-7 top-5 h-20 w-10 rounded-r-full bg-[#ba936f]" />
             <div className="absolute left-1/2 top-16 -translate-x-1/2"><LogoMark small /></div>
           </div>
         )}
 
         {product.type === "crew" && (
-          <div className="relative h-48 w-44 rounded-b-[1.5rem] rounded-t-[1rem] bg-[#51504f] shadow-[0_18px_35px_rgba(0,0,0,0.22)]">
-            <div className="absolute left-1/2 top-0 h-5 w-16 -translate-x-1/2 rounded-b-full bg-[#666462]" />
-            <div className="absolute -left-7 top-5 h-20 w-10 rounded-l-full bg-[#51504f]" />
-            <div className="absolute -right-7 top-5 h-20 w-10 rounded-r-full bg-[#51504f]" />
+          <div className="relative h-48 w-44 rounded-b-[1.5rem] rounded-t-[1rem] bg-[#4d3a31] shadow-[0_18px_35px_rgba(0,0,0,0.22)]">
+            <div className="absolute left-1/2 top-0 h-5 w-16 -translate-x-1/2 rounded-b-full bg-[#6a5549]" />
+            <div className="absolute -left-7 top-5 h-20 w-10 rounded-l-full bg-[#4d3a31]" />
+            <div className="absolute -right-7 top-5 h-20 w-10 rounded-r-full bg-[#4d3a31]" />
             <div className="absolute left-1/2 top-14 -translate-x-1/2"><LogoMark dark small /></div>
           </div>
         )}
 
         {product.type === "cap" && (
-          <div className="relative h-28 w-44 rounded-t-full bg-[#121212] shadow-[0_18px_35px_rgba(0,0,0,0.25)]">
-            <div className="absolute right-[-8px] top-12 h-7 w-24 rounded-r-full bg-[#1f1f1f]" />
+          <div className="relative h-28 w-44 rounded-t-full bg-[#191311] shadow-[0_18px_35px_rgba(0,0,0,0.25)]">
+            <div className="absolute right-[-8px] top-12 h-7 w-24 rounded-r-full bg-[#2b201c]" />
             <div className="absolute left-1/2 top-10 -translate-x-1/2"><LogoMark dark small /></div>
           </div>
         )}
 
         {product.type === "pants" && (
           <div className="relative h-56 w-36">
-            <div className="absolute left-0 top-0 h-full w-[47%] rounded-b-[1.4rem] rounded-t-[0.7rem] bg-[#ece2d6] shadow-[0_18px_35px_rgba(0,0,0,0.14)]" />
-            <div className="absolute right-0 top-0 h-full w-[47%] rounded-b-[1.4rem] rounded-t-[0.7rem] bg-[#e2d6c8] shadow-[0_18px_35px_rgba(0,0,0,0.14)]" />
+            <div className="absolute left-0 top-0 h-full w-[47%] rounded-b-[1.4rem] rounded-t-[0.7rem] bg-[#e6d8c8] shadow-[0_18px_35px_rgba(0,0,0,0.14)]" />
+            <div className="absolute right-0 top-0 h-full w-[47%] rounded-b-[1.4rem] rounded-t-[0.7rem] bg-[#d6c2ab] shadow-[0_18px_35px_rgba(0,0,0,0.14)]" />
             <div className="absolute left-1/2 top-6 -translate-x-1/2"><LogoMark small /></div>
           </div>
         )}
 
         {product.type === "zip" && (
-          <div className="relative h-52 w-44 rounded-b-[1.5rem] rounded-t-[1rem] bg-[#73755f] shadow-[0_18px_35px_rgba(0,0,0,0.18)]">
+          <div className="relative h-52 w-44 rounded-b-[1.5rem] rounded-t-[1rem] bg-[#7f6654] shadow-[0_18px_35px_rgba(0,0,0,0.18)]">
             <div className="absolute left-1/2 top-0 h-full w-[2px] -translate-x-1/2 bg-white/40" />
-            <div className="absolute left-1/2 top-[-14px] h-10 w-20 -translate-x-1/2 rounded-t-[999px] border border-black/10 bg-[#7f8069]" />
-            <div className="absolute -left-7 top-5 h-20 w-10 rounded-l-full bg-[#73755f]" />
-            <div className="absolute -right-7 top-5 h-20 w-10 rounded-r-full bg-[#73755f]" />
+            <div className="absolute left-1/2 top-[-14px] h-10 w-20 -translate-x-1/2 rounded-t-[999px] border border-black/10 bg-[#927864]" />
+            <div className="absolute -left-7 top-5 h-20 w-10 rounded-l-full bg-[#7f6654]" />
+            <div className="absolute -right-7 top-5 h-20 w-10 rounded-r-full bg-[#7f6654]" />
             <div className="absolute left-1/2 top-16 -translate-x-1/2"><LogoMark dark small /></div>
           </div>
         )}
@@ -224,7 +229,7 @@ export default function ArchhausLandingPage() {
   function CartDrawer() {
     return (
       <div
-        className={`fixed inset-y-0 right-0 z-[70] w-full max-w-md transform border-l border-black/10 bg-[#f7f2ea] shadow-[0_20px_80px_rgba(0,0,0,0.18)] transition duration-300 ${
+        className={`fixed inset-y-0 right-0 z-[70] w-full max-w-md transform border-l border-black/10 bg-[#f6efe6] shadow-[0_20px_80px_rgba(0,0,0,0.18)] transition duration-300 ${
           cartOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -242,13 +247,13 @@ export default function ArchhausLandingPage() {
           <div className="flex-1 space-y-4 overflow-auto px-6 py-5">
             {cart.length === 0 ? (
               <div className="rounded-[1.5rem] border border-black/10 bg-white p-6 text-sm leading-7 text-black/60">
-                Your cart is empty. Add a piece from the collection to begin building the first Archhaus drop.
+                Your cart is empty. Add a piece from the collection to begin building the first Magnus drop.
               </div>
             ) : (
               cart.map((item) => (
                 <div key={item.id} className="rounded-[1.5rem] border border-black/10 bg-white p-4 shadow-sm">
                   <div className="flex items-start gap-4">
-                    <div className="flex h-20 w-20 items-center justify-center rounded-[1.2rem] border border-black/8 bg-[#ece5da]">
+                    <div className="flex h-20 w-20 items-center justify-center rounded-[1.2rem] border border-black/8 bg-[#eee2d5]">
                       <LogoMark small />
                     </div>
                     <div className="flex-1">
@@ -260,9 +265,9 @@ export default function ArchhausLandingPage() {
                         <div className="text-sm text-black/70">${item.price}</div>
                       </div>
                       <div className="mt-4 flex items-center gap-2">
-                        <button onClick={() => updateQty(item.id, -1)} className="rounded-full border border-black/10 p-2 hover:bg-[#f5f1ea]"><Minus className="h-3.5 w-3.5" /></button>
+                        <button onClick={() => updateQty(item.id, -1)} className="rounded-full border border-black/10 p-2 hover:bg-[#f2e8db]"><Minus className="h-3.5 w-3.5" /></button>
                         <div className="min-w-8 text-center text-sm">{item.qty}</div>
-                        <button onClick={() => updateQty(item.id, 1)} className="rounded-full border border-black/10 p-2 hover:bg-[#f5f1ea]"><Plus className="h-3.5 w-3.5" /></button>
+                        <button onClick={() => updateQty(item.id, 1)} className="rounded-full border border-black/10 p-2 hover:bg-[#f2e8db]"><Plus className="h-3.5 w-3.5" /></button>
                       </div>
                     </div>
                   </div>
@@ -290,20 +295,20 @@ export default function ArchhausLandingPage() {
     return (
       <>
         <section className="relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.95),transparent_25%),radial-gradient(circle_at_bottom_left,rgba(0,0,0,0.04),transparent_30%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,248,240,0.95),transparent_24%),radial-gradient(circle_at_bottom_left,rgba(66,43,31,0.05),transparent_30%)]" />
           <div className="mx-auto grid max-w-7xl gap-14 px-6 py-16 md:grid-cols-2 md:px-10 md:py-24">
             <div className="relative z-10 flex flex-col justify-center">
-              <div className="mb-5 inline-flex w-fit items-center gap-3 rounded-full border border-black/10 bg-white/80 px-4 py-2 text-[0.72rem] uppercase tracking-[0.3em] text-black/60 shadow-sm">
+              <div className="mb-5 inline-flex w-fit items-center gap-3 rounded-full border border-[#4a3529]/10 bg-white/80 px-4 py-2 text-[0.72rem] uppercase tracking-[0.3em] text-black/60 shadow-sm">
                 <span className="inline-block h-2 w-2 rounded-full bg-black" />
-                Quiet Luxury Streetwear
+                Founder-Led Luxury Streetwear
               </div>
               <h1 className="max-w-xl text-5xl font-light leading-[1.02] tracking-[-0.04em] md:text-7xl">
-                Refined essentials for a more effortless daily uniform.
+                Refined essentials shaped by personal presence and effortless confidence.
               </h1>
               <p className="mt-6 max-w-lg text-base leading-7 text-black/65 md:text-lg">
-                Archhaus brings architectural clarity to modern streetwear—clean silhouettes,
-                restrained detailing, and a premium visual language that feels elevated,
-                inviting, and easy to wear.
+                Magnus brings a more personal kind of luxury to modern streetwear—clean silhouettes,
+                warm restraint, and a premium visual language that feels confident,
+                inviting, and naturally elevated.
               </p>
 
               <div className="mt-10 flex flex-wrap items-center gap-4">
@@ -317,49 +322,49 @@ export default function ArchhausLandingPage() {
                   href="#philosophy"
                   className="rounded-full border border-black/15 px-7 py-3 text-sm uppercase tracking-[0.22em] transition hover:bg-white"
                 >
-                  Discover Archhaus
+                  Discover Magnus
                 </a>
               </div>
 
               <div className="mt-12 grid max-w-xl grid-cols-3 gap-4 border-t border-black/10 pt-6">
                 <div>
                   <div className="text-2xl font-light">01</div>
-                  <div className="mt-1 text-sm text-black/55">Launch collection built around modern essentials.</div>
+                  <div className="mt-1 text-sm text-black/55">Launch collection built around refined everyday staples.</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-light">AH</div>
-                  <div className="mt-1 text-sm text-black/55">Signature monogram designed for subtle identity.</div>
+                  <div className="text-2xl font-light">M</div>
+                  <div className="mt-1 text-sm text-black/55">Founder monogram designed for subtle identity.</div>
                 </div>
                 <div>
                   <div className="text-2xl font-light">24/7</div>
-                  <div className="mt-1 text-sm text-black/55">Made for campus, city, evenings, and everyday wear.</div>
+                  <div className="mt-1 text-sm text-black/55">Made for city life, evenings, campus, and everyday wear.</div>
                 </div>
               </div>
             </div>
 
             <div className="relative z-10">
               <div className="grid h-full gap-5 md:grid-cols-[1.1fr_0.9fr]">
-                <div className="min-h-[500px] rounded-[2rem] border border-black/10 bg-[#d8d1c5] p-6 shadow-[0_20px_60px_rgba(0,0,0,0.08)]">
-                  <div className="flex h-full flex-col justify-between rounded-[1.5rem] border border-white/35 bg-[linear-gradient(180deg,rgba(255,255,255,0.45),rgba(255,255,255,0.08))] p-6">
+                <div className="min-h-[500px] rounded-[2rem] border border-black/10 bg-[#d8c3af] p-6 shadow-[0_20px_60px_rgba(42,28,20,0.10)]">
+                  <div className="flex h-full flex-col justify-between rounded-[1.5rem] border border-white/35 bg-[linear-gradient(180deg,rgba(255,248,242,0.50),rgba(255,255,255,0.08))] p-6">
                     <div className="flex items-center justify-between">
                       <span className="rounded-full bg-black/80 px-3 py-1 text-[0.65rem] uppercase tracking-[0.25em] text-white">
                         Drop 001
                       </span>
-                      <span className="text-xs uppercase tracking-[0.28em] text-black/55">Archhaus</span>
+                      <span className="text-xs uppercase tracking-[0.28em] text-black/55">Magnus</span>
                     </div>
 
                     <div className="flex flex-1 items-center justify-center py-10">
-                      <div className="flex h-52 w-52 items-center justify-center rounded-[2rem] border border-black/10 bg-[#f8f4ee] shadow-inner">
+                      <div className="flex h-52 w-52 items-center justify-center rounded-[2rem] border border-black/10 bg-[#fbf5ed] shadow-inner">
                         <LogoMark />
                       </div>
                     </div>
 
                     <div>
                       <div className="text-sm uppercase tracking-[0.25em] text-black/50">Signature Mark</div>
-                      <div className="mt-2 text-2xl font-light">The AH monogram</div>
+                      <div className="mt-2 text-2xl font-light">The Magnus monogram</div>
                       <p className="mt-3 max-w-sm text-sm leading-6 text-black/65">
-                        A custom geometric mark that brings more structure and polish to the identity system,
-                        built to feel premium on tags, caps, packaging, and garments.
+                        A custom serif-inspired monogram that gives Magnus a more personal and heritage-leaning identity,
+                        designed to feel premium across tags, caps, packaging, and garments.
                       </p>
                     </div>
                   </div>
@@ -370,11 +375,11 @@ export default function ArchhausLandingPage() {
                     <div className="text-[0.7rem] uppercase tracking-[0.28em] text-black/45">Palette</div>
                     <div className="mt-4 flex gap-3">
                       {[
-                        "#111111",
-                        "#f5f1ea",
-                        "#8f826f",
-                        "#6d6a66",
-                        "#7d8064",
+                        "#151311",
+                        "#f4ede5",
+                        "#b38762",
+                        "#6e5244",
+                        "#d0b59c",
                       ].map((color) => (
                         <div
                           key={color}
@@ -384,14 +389,14 @@ export default function ArchhausLandingPage() {
                       ))}
                     </div>
                     <p className="mt-4 text-sm leading-6 text-black/60">
-                      Black, stone, taupe, charcoal, and muted olive shape the first visual language.
+                      Black, cream, camel, espresso, and warm stone shape the Magnus visual language.
                     </p>
                   </div>
 
-                  <div className="rounded-[2rem] border border-black/10 bg-[#111111] p-6 text-white shadow-[0_16px_45px_rgba(0,0,0,0.16)]">
+                  <div className="rounded-[2rem] border border-black/10 bg-[#171311] p-6 text-white shadow-[0_16px_45px_rgba(0,0,0,0.16)]">
                     <div className="text-[0.7rem] uppercase tracking-[0.28em] text-white/45">Brand Note</div>
                     <p className="mt-4 text-lg font-light leading-8 text-white/90">
-                      Style that feels expensive, accessible, and lived in—without losing its edge.
+                      Style that feels elevated, personal, and quietly aspirational—without feeling closed off.
                     </p>
                   </div>
                 </div>
@@ -405,11 +410,11 @@ export default function ArchhausLandingPage() {
             <div>
               <div className="text-[0.72rem] uppercase tracking-[0.3em] text-black/45">Collection</div>
               <h2 className="mt-3 text-3xl font-light tracking-[-0.03em] md:text-5xl">
-                The first Archhaus drop.
+                The first Magnus drop.
               </h2>
             </div>
             <p className="max-w-xl text-sm leading-6 text-black/60 md:text-base">
-              Built as a refined capsule of everyday essentials—minimal, wearable, and designed to invite repeat use.
+              Built as a refined capsule of everyday essentials—elevated, wearable, and designed to feel personal from the first piece onward.
             </p>
           </div>
 
@@ -437,7 +442,7 @@ export default function ArchhausLandingPage() {
                   </button>
                   <button
                     onClick={() => setPage("collection")}
-                    className="rounded-full border border-black/15 px-4 py-2 text-sm transition hover:bg-[#f5f1ea]"
+                    className="rounded-full border border-black/15 px-4 py-2 text-sm transition hover:bg-[#f2e8db]"
                   >
                     View Piece
                   </button>
@@ -461,22 +466,19 @@ export default function ArchhausLandingPage() {
             <div>
               <div className="text-[0.72rem] uppercase tracking-[0.3em] text-black/45">Philosophy</div>
               <h2 className="mt-3 text-3xl font-light tracking-[-0.03em] md:text-5xl">
-                Luxury in restraint. Streetwear in form.
+                Luxury in character. Streetwear in confidence.
               </h2>
             </div>
             <div className="space-y-6 text-base leading-8 text-black/65">
               <p>
-                Archhaus is built for young adults who want their style to feel composed rather than overworked.
-                It draws from architecture, clean interiors, calm city spaces, and the idea that casual clothing can still
-                carry real presence.
+                Magnus is built for young adults who want their style to feel composed, attractive, and self-assured without trying too hard.
+                It draws from heritage fashion cues, modern city dressing, warm interiors, and the idea that casual clothing can still carry real distinction.
               </p>
               <p>
-                The brand is intentionally open and inviting. While the design language is refined, the world of Archhaus is
-                not exclusive in attitude—it is meant to be explored, worn, and made personal.
+                The brand is intentionally open and inviting. While the design language is refined, the world of Magnus is not exclusive in attitude—it is meant to be explored, worn, and made your own.
               </p>
               <p>
-                Every piece is guided by clarity, comfort, and visual discipline, creating a uniform that feels modern,
-                mature, and easy to step into.
+                Every piece is guided by confidence, comfort, and visual discipline, creating a wardrobe that feels modern, mature, and easy to step into.
               </p>
             </div>
           </div>
@@ -486,7 +488,7 @@ export default function ArchhausLandingPage() {
           <div className="mb-10">
             <div className="text-[0.72rem] uppercase tracking-[0.3em] text-black/45">Journal</div>
             <h2 className="mt-3 text-3xl font-light tracking-[-0.03em] md:text-5xl">
-              A softer kind of statement.
+              A stronger kind of quiet.
             </h2>
           </div>
 
@@ -494,9 +496,9 @@ export default function ArchhausLandingPage() {
             {journal.map((item) => (
               <article
                 key={item.title}
-                className="rounded-[2rem] border border-black/10 bg-[#f8f5ef] p-6 shadow-[0_12px_30px_rgba(0,0,0,0.04)]"
+                className="rounded-[2rem] border border-black/10 bg-[#f8f1e8] p-6 shadow-[0_12px_30px_rgba(0,0,0,0.04)]"
               >
-                <div className="text-[0.7rem] uppercase tracking-[0.26em] text-black/40">Archhaus Note</div>
+                <div className="text-[0.7rem] uppercase tracking-[0.26em] text-black/40">Magnus Note</div>
                 <h3 className="mt-4 text-2xl font-light tracking-[-0.02em]">{item.title}</h3>
                 <p className="mt-4 text-sm leading-7 text-black/60">{item.text}</p>
               </article>
@@ -505,14 +507,14 @@ export default function ArchhausLandingPage() {
         </section>
 
         <section id="newsletter" className="mx-auto max-w-5xl px-6 pb-16 md:px-10 md:pb-24">
-          <div className="rounded-[2.25rem] border border-black/10 bg-[#111111] px-6 py-12 text-white shadow-[0_25px_70px_rgba(0,0,0,0.18)] md:px-12">
+          <div className="rounded-[2.25rem] border border-black/10 bg-[#171311] px-6 py-12 text-white shadow-[0_25px_70px_rgba(0,0,0,0.18)] md:px-12">
             <div className="mx-auto max-w-3xl text-center">
-              <div className="text-[0.72rem] uppercase tracking-[0.32em] text-white/45">Join Archhaus</div>
+              <div className="text-[0.72rem] uppercase tracking-[0.32em] text-white/45">Join Magnus</div>
               <h2 className="mt-4 text-3xl font-light tracking-[-0.03em] md:text-5xl">
                 Be first into the next drop.
               </h2>
               <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-white/70 md:text-base">
-                Get launch updates, early access, and a closer look at the evolving world of Archhaus.
+                Get launch updates, early access, and a closer look at the evolving world of Magnus.
               </p>
 
               <div className="mx-auto mt-8 flex max-w-xl flex-col gap-3 sm:flex-row">
@@ -551,7 +553,7 @@ export default function ArchhausLandingPage() {
                 className={`rounded-full px-4 py-2 text-sm transition ${
                   selectedCategory === category
                     ? "bg-black text-white"
-                    : "border border-black/15 bg-white text-black hover:bg-[#f5f1ea]"
+                    : "border border-black/15 bg-white text-black hover:bg-[#f2e8db]"
                 }`}
               >
                 {category}
@@ -594,15 +596,15 @@ export default function ArchhausLandingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f5f1ea] text-[#161616] selection:bg-black selection:text-white">
-      <header className="sticky top-0 z-50 border-b border-black/10 bg-[#f5f1ea]/90 backdrop-blur">
+    <div className="min-h-screen bg-[#f4ede5] text-[#16110f] selection:bg-black selection:text-white">
+      <header className="sticky top-0 z-50 border-b border-black/10 bg-[#f4ede5]/90 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-10">
           <button onClick={() => setPage("home")} className="flex items-center gap-4 text-left">
             <LogoMark />
             <div>
-              <div className="text-[0.92rem] uppercase tracking-[0.42em]">Archhaus</div>
+              <div className="text-[0.92rem] uppercase tracking-[0.42em]">Magnus</div>
               <div className="text-[0.72rem] uppercase tracking-[0.28em] text-black/50">
-                Understated by Design
+                Quiet Confidence, Worn Well
               </div>
             </div>
           </button>
@@ -636,7 +638,7 @@ export default function ArchhausLandingPage() {
         </div>
 
         {mobileOpen && (
-          <div className="border-t border-black/10 bg-[#f5f1ea] px-6 py-4 md:hidden">
+          <div className="border-t border-black/10 bg-[#f4ede5] px-6 py-4 md:hidden">
             <div className="flex flex-col gap-3 text-sm text-black/70">
               <button onClick={() => { setPage("home"); setMobileOpen(false); }} className="rounded-xl border border-black/10 bg-white px-4 py-3 text-left">Home</button>
               <button onClick={() => { setPage("collection"); setMobileOpen(false); }} className="rounded-xl border border-black/10 bg-white px-4 py-3 text-left">Collection</button>
@@ -656,36 +658,36 @@ export default function ArchhausLandingPage() {
               <div className="flex items-center gap-3 text-[0.72rem] uppercase tracking-[0.28em] text-black/45">
                 <Sparkles className="h-4 w-4" /> Storefront Detail
               </div>
-              <h3 className="mt-4 text-2xl font-light">Shopify-style layout</h3>
+              <h3 className="mt-4 text-2xl font-light">Luxury storefront layout</h3>
               <p className="mt-3 text-sm leading-7 text-black/60">
-                The site now reads more like a proper online store, with shopping actions, category browsing, and stronger product presentation.
+                The site now reads more like a polished fashion storefront, with shopping actions, category browsing, and stronger product presentation.
               </p>
             </div>
             <div className="rounded-[2rem] border border-black/10 bg-white p-6 shadow-sm">
               <div className="text-[0.72rem] uppercase tracking-[0.28em] text-black/45">Logo Upgrade</div>
-              <h3 className="mt-4 text-2xl font-light">Custom AH monogram</h3>
+              <h3 className="mt-4 text-2xl font-light">Custom Magnus monogram</h3>
               <p className="mt-3 text-sm leading-7 text-black/60">
-                A more bespoke mark replaces the basic initials, giving Archhaus a cleaner and more recognizable identity across the site.
+                A more bespoke mark replaces the basic initial treatment, giving Magnus a cleaner and more recognizable identity across the site.
               </p>
             </div>
             <div className="rounded-[2rem] border border-black/10 bg-white p-6 shadow-sm">
               <div className="text-[0.72rem] uppercase tracking-[0.28em] text-black/45">Mobile Ready</div>
               <h3 className="mt-4 text-2xl font-light">Responsive menu + cart</h3>
               <p className="mt-3 text-sm leading-7 text-black/60">
-                Young shoppers can explore smoothly on mobile through the slide-down menu and cart drawer without losing the refined brand feel.
+                Young shoppers can explore smoothly on mobile through the slide-down menu and cart drawer without losing the elevated, inviting brand feel.
               </p>
             </div>
           </div>
         </section>
       </main>
 
-      <footer className="border-t border-black/10 bg-[#f5f1ea]">
+      <footer className="border-t border-black/10 bg-[#f4ede5]">
         <div className="mx-auto flex max-w-7xl flex-col gap-6 px-6 py-8 text-sm text-black/55 md:flex-row md:items-center md:justify-between md:px-10">
           <div className="flex items-center gap-4">
             <LogoMark small />
             <div>
-              <div className="uppercase tracking-[0.34em] text-black">Archhaus</div>
-              <div className="text-xs uppercase tracking-[0.22em] text-black/45">Quiet Presence</div>
+              <div className="uppercase tracking-[0.34em] text-black">Magnus</div>
+              <div className="text-xs uppercase tracking-[0.22em] text-black/45">Quiet Strength</div>
             </div>
           </div>
 
